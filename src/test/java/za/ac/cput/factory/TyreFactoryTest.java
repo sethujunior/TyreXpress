@@ -11,7 +11,7 @@ import za.ac.cput.domain.Tyre;
 
 public class TyreFactoryTest {
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         Tyre tyre = TyreFactory.createTyre(
                 "P001",

@@ -26,7 +26,7 @@ public class TyreFactory {
         if (speedRating == null || speedRating.isEmpty()) return null;
         if (runFlat == null) return null;
 
-        Tyre.Builder builder= new Tyre.Builder();
+        Tyre.Builder builder = new Tyre.Builder();
 
         builder.setProductID(productID);
         builder.setName(name);

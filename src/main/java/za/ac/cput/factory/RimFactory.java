@@ -5,7 +5,7 @@ import za.ac.cput.domain.Rim;
 
 public class RimFactory {
 
-    public static Rim createRim  (String productID,
+    public static Rim createRim (String productID,
                                 String name,
                                 String brand,
                                 double price,

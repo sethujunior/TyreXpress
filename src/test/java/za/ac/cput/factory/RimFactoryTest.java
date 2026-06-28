@@ -14,7 +14,7 @@ public class RimFactoryTest {
 
     public static void main(String[] args) {
 
-        Rim rim =RimFactory.createRim(
+        Rim rim = RimFactory.createRim(
                 "P002",
                 "RS Alloy",
                 "BBS",
