@@ -7,6 +7,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TyreXpressApplication {
     public static void main(String[] args) {
         SpringApplication.run(TyreXpressApplication.class, args);
-
     }
 }

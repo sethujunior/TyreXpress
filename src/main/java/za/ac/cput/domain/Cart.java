@@ -1,16 +1,26 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.*;
+import java.util.Objects;
+
+@Entity
+@Table(name = "cart")
 public class Cart {
-    private String cartId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long cartId;
+
     private String customerId;
 
+    protected Cart() {}
 
     private Cart(Builder builder) {
         this.cartId = builder.cartId;
         this.customerId = builder.customerId;
     }
 
-      public String getCartId() {
+    public Long getCartId() {
         return cartId;
     }
 
@@ -19,18 +29,31 @@ public class Cart {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cart cart = (Cart) o;
+        return Objects.equals(cartId, cart.cartId) && Objects.equals(customerId, cart.customerId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cartId, customerId);
+    }
+
+    @Override
     public String toString() {
         return "Cart{" +
-                "cartId='" + cartId + '\'' +
+                "cartId=" + cartId +
                 ", customerId='" + customerId + '\'' +
                 '}';
     }
 
-      public static class Builder {
-        private String cartId;
+    public static class Builder {
+        private Long cartId;
         private String customerId;
 
-        public Builder setCartId(String cartId) {
+        public Builder setCartId(Long cartId) {
             this.cartId = cartId;
             return this;
         }
@@ -51,4 +74,3 @@ public class Cart {
         }
     }
 }
-

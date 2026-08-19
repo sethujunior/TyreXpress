@@ -1,46 +1,48 @@
 package za.ac.cput.service;
 
-import za.ac.cput.domain.*;
-import za.ac.cput.repository.*;
-import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import za.ac.cput.domain.Cart;
+import za.ac.cput.repository.ICartRepo;
 
+import java.util.List;
+
+@Service
 public class CartService implements ICartService {
-    private static CartService service = null;
-    private ICartRepo repository;
 
-    private CartService() {
-            this.repository = CartRepository.getRepository();
-    }
+    private final ICartRepo repository;
 
-    public static CartService getService() {
-        if (service == null) {
-            service = new CartService();
-        }
-        return service;
+    @Autowired
+    public CartService(ICartRepo repository) {
+        this.repository = repository;
     }
 
     @Override
     public Cart create(Cart cart) {
-        return repository.create(cart);
+        return repository.save(cart);
     }
 
     @Override
-    public Cart read(String cartId) {
-        return repository.read(cartId);
+    public Cart read(Long cartId) {
+        return repository.findById(cartId).orElse(null);
     }
 
     @Override
     public Cart update(Cart cart) {
-        return repository.update(cart);
+        return repository.save(cart);
     }
 
     @Override
-    public boolean delete(String cartId) {
-        return repository.delete(cartId);
+    public boolean delete(Long cartId) {
+        if (repository.existsById(cartId)) {
+            repository.deleteById(cartId);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public List<Cart> getAll() {
-        return repository.getAll();
+        return repository.findAll();
     }
 }
