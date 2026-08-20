@@ -21,7 +21,7 @@ class OrderServiceTest {
     @Test
     void create() {
         Order order = OrderFactory.createOrder(
-                "11",
+                11L,
                 1500.00,
                 LocalDate.now(),
                 OrderStatus.PENDING,
@@ -36,7 +36,7 @@ class OrderServiceTest {
     @Test
     void read() {
         Order order = OrderFactory.createOrder(
-                "11",
+                11L,
                 1500.00,
                 LocalDate.now(),
                 OrderStatus.PENDING,
@@ -45,14 +45,14 @@ class OrderServiceTest {
                 "P1"
         );
         service.create(order);
-        Order read = service.read("11");
+        Order read = service.read(11L);
         System.out.println("Read: " + read);
     }
 
     @Test
     void update() {
         Order order = OrderFactory.createOrder(
-                "11",
+                11L,
                 1500.00,
                 LocalDate.now(),
                 OrderStatus.PENDING,
@@ -73,7 +73,7 @@ class OrderServiceTest {
     @Test
     void delete() {
         Order order = OrderFactory.createOrder(
-                "11",
+                11L,
                 1500.00,
                 LocalDate.now(),
                 OrderStatus.PENDING,
@@ -82,14 +82,14 @@ class OrderServiceTest {
                 "P1"
         );
         service.create(order);
-        boolean delete = service.delete("11");
+        boolean delete = service.delete(11L);
         System.out.println("Delete: " + delete);
     }
 
     @Test
     void getAll() {
         Order order = OrderFactory.createOrder(
-                "11",
+                11L,
                 1500.00,
                 LocalDate.now(),
                 OrderStatus.PENDING,

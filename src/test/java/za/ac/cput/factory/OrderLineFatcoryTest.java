@@ -10,7 +10,7 @@ class OrderLineFatcoryTest {
     void createOrderLine() {
 
         OrderLine orderLine = OrderLineFatcory.createOrderLine(
-                "OL1",
+                1L,
                 2,
                 250.00,
                 500.00,

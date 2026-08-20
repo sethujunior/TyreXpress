@@ -13,7 +13,7 @@ class OrderFactoryTest {
     void createOrder() {
 
         Order order = OrderFactory.createOrder(
-                "11",
+                11L,
                 1500.00,
                 LocalDate.now(),
                 OrderStatus.PENDING,

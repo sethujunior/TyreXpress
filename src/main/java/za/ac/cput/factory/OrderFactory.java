@@ -7,9 +7,9 @@ import za.ac.cput.util.Helper;
 import java.time.LocalDate;
 
 public class OrderFactory {
-    public static Order createOrder(String orderId, double totalAmount, LocalDate date, OrderStatus status,
+    public static Order createOrder(Long orderId, double totalAmount, LocalDate date, OrderStatus status,
                                     String customerId, String addressId, String paymentId) {
-        if (Helper.isNullOrEmpty(orderId) || Helper.isNullOrEmpty(addressId) || Helper.isNullOrEmpty(paymentId)) {
+        if (orderId == null || Helper.isNullOrEmpty(addressId) || Helper.isNullOrEmpty(paymentId)) {
             return null;
         }
         if (totalAmount <= 0) {

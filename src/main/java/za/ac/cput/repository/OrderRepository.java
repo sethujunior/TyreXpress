@@ -30,7 +30,7 @@ public class OrderRepository implements IOrderRepository {
         return null;
     }
     @Override
-    public Order read(String orderId) {
+    public Order read(Long orderId) {
         for(Order order:orderList){
             if(order.getOrderId().equals(orderId)){
                 return order;
@@ -41,7 +41,7 @@ public class OrderRepository implements IOrderRepository {
 
     @Override
     public Order update(Order order) {
-        String id = order.getOrderId();
+        Long id = order.getOrderId();
         Order oldOrder = read(id);
 
         if(oldOrder == null){
@@ -58,7 +58,7 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
-    public boolean delete(String orderId) {
+    public boolean delete(Long orderId) {
         Order orderToDelete = read(orderId);
         if(orderToDelete == null){
             return false;

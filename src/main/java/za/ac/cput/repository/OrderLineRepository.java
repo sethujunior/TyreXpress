@@ -13,11 +13,11 @@ public class OrderLineRepository implements IOrderLineRepository{
             orderLineList = new ArrayList<>();
         }
 
-        public static IOrderLineRepository getRepository() {
-            if (repository == null) {
-                repository = new OrderLineRepository();
-            }
-            return repository;
+    public static IOrderLineRepository getRepository() {
+        if (repository == null) {
+            repository = new OrderLineRepository();
+        }
+        return repository;
         }
 
     @Override
@@ -30,7 +30,7 @@ public class OrderLineRepository implements IOrderLineRepository{
     }
 
     @Override
-    public OrderLine read(String orderLineId) {
+    public OrderLine read(Long orderLineId) {
         for(OrderLine orderLine:orderLineList){
             if(orderLine.getOrderLineId().equals(orderLineId)){
                 return orderLine;
@@ -41,7 +41,7 @@ public class OrderLineRepository implements IOrderLineRepository{
 
     @Override
     public OrderLine update(OrderLine orderLine) {
-        String id = orderLine.getOrderLineId();
+        Long id = orderLine.getOrderLineId();
         OrderLine oldOrder = read(id);
 
         if(oldOrder == null){
@@ -58,7 +58,7 @@ public class OrderLineRepository implements IOrderLineRepository{
     }
 
     @Override
-    public boolean delete(String orderLineId) {
+    public boolean delete(Long orderLineId) {
         OrderLine orderToDelete = read(orderLineId);
         if(orderToDelete == null){
             return false;

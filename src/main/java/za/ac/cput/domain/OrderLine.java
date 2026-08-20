@@ -1,11 +1,21 @@
 package za.ac.cput.domain;
 
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "order_lines")
 public class OrderLine {
-    private String orderLineId;
+    @Id
+    private Long orderLineId;
     private int quantity;
     private double unitPrice;
     private double lineTotal;
     private String productId;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     public OrderLine(){
 
@@ -18,7 +28,7 @@ public class OrderLine {
         this.productId = builder.productId;
     }
 
-    public String getOrderLineId() {
+    public Long getOrderLineId() {
         return orderLineId;
     }
 
@@ -49,13 +59,13 @@ public class OrderLine {
                 '}';
     }
     public static class Builder{
-        private String orderLineId;
+        private Long orderLineId;
         private int quantity;
         private double unitPrice;
         private double lineTotal;
         private String productId;
 
-        public Builder setOrderLineId(String orderLineID) {
+        public Builder setOrderLineId(Long orderLineID) {
             this.orderLineId = orderLineId;
             return this;
         }
