@@ -1,7 +1,6 @@
 package za.ac.cput.domain;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,15 +9,15 @@ import java.util.List;
 public class Order {
 
     @Id
-    @Column(name = "order_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
     private double totalAmount;
     private LocalDate date;
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
     private String customerId;
     private String addressId;
     private String paymentId;
-
     // Composition → Order contains many OrderLines
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderLine> orderLines;

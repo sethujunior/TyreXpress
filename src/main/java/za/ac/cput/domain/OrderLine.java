@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 @Table(name = "order_lines")
 public class OrderLine {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderLineId;
     private int quantity;
     private double unitPrice;
