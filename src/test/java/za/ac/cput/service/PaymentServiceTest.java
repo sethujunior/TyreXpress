@@ -1,24 +1,22 @@
 /* PaymentServiceTest.java
    Payment Service Test class
-   Author: Bongikazi Mnyamana (222718404) */
+   Author: Bongikazi Mnyamana (222718404)*/
 
 package za.ac.cput.service;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Payment;
 import za.ac.cput.domain.PaymentMethod;
 import za.ac.cput.domain.PaymentStatus;
 import za.ac.cput.factory.PaymentFactory;
 
+@SpringBootTest
 class PaymentServiceTest {
 
+    @Autowired
     private PaymentService service;
-
-    @BeforeEach
-    void setUp() {
-        service = PaymentService.getService();
-    }
 
     @Test
     void testCreate() {
@@ -57,12 +55,10 @@ class PaymentServiceTest {
                 "order-003"
         );
         service.create(payment);
-
         Payment updated = new Payment.Builder()
                 .copy(payment)
                 .setStatus(PaymentStatus.PAID)
                 .build();
-
         Payment result = service.update(updated);
         System.out.println("Updated: " + result);
     }

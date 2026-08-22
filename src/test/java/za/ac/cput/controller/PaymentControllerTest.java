@@ -5,22 +5,19 @@
 
 package za.ac.cput.controller;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Payment;
 import za.ac.cput.domain.PaymentMethod;
 import za.ac.cput.domain.PaymentStatus;
 import za.ac.cput.factory.PaymentFactory;
-import za.ac.cput.service.PaymentService;
 
+@SpringBootTest
 class PaymentControllerTest {
 
+    @Autowired
     private PaymentController controller;
-
-    @BeforeEach
-    void setUp() {
-        controller = new PaymentController(PaymentService.getService());
-    }
 
     @Test
     void testCreate() {
@@ -59,12 +56,10 @@ class PaymentControllerTest {
                 "order-003"
         );
         controller.create(payment);
-
         Payment updated = new Payment.Builder()
                 .copy(payment)
                 .setStatus(PaymentStatus.PAID)
                 .build();
-
         Payment result = controller.update(updated);
         System.out.println("Updated: " + result);
     }
