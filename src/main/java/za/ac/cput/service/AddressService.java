@@ -1,47 +1,41 @@
 package za.ac.cput.service;
 
+import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Address;
-import za.ac.cput.repository.AddressRepository;
 import za.ac.cput.repository.*;
 import java.util.*;
 
+@Service
 public class AddressService implements IAddressService{
+    private IAddressRepository repository;
 
-    private static AddressService service = null;
-    private IAddress repository;
+    public AddressService(IAddressRepository repository) {
+        this.repository = repository;
+    }
 
-    private AddressService() {
-        repository = AddressRepository.getRepository();
-    }
-    public static AddressService getService() {
-        if (service == null) {
-            service = new AddressService();
-        }
-        return service;
-    }
 
     @Override
     public Address create(Address address) {
-        return null;
+        return repository.save(address);
     }
 
     @Override
-    public Address read(String s) {
-        return null;
+    public Address read(Long addressId) {
+        return repository.findById(addressId).orElse(null);
     }
 
     @Override
     public Address update(Address address) {
-        return null;
+        return repository.save(address);
     }
 
     @Override
-    public boolean delete(String s) {
-        return false;
+    public boolean delete(Long addressId) {
+        return repository.existsById(addressId);
     }
 
     @Override
     public List<Address> getAll() {
-        return List.of();
+        return repository.findAll();
     }
 }

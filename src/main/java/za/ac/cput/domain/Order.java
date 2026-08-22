@@ -1,18 +1,26 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
+@Table(name = "orders")
 public class Order {
-    private String orderID;
+
+    @Id
+    @Column(name = "order_id")
+    private Long orderId;
     private double totalAmount;
     private LocalDate date;
     private OrderStatus status;
-    private String customerID;
-    private String addressID;
-    private String paymentID;
+    private String customerId;
+    private String addressId;
+    private String paymentId;
 
     // Composition → Order contains many OrderLines
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderLine> orderLines;
 
     public Order() {
@@ -20,17 +28,17 @@ public class Order {
     }
 
     public Order(Builder builder) {
-        this.orderID = builder.orderID;
+        this.orderId = builder.orderId;
         this.totalAmount = builder.totalAmount;
         this.date = builder.date;
         this.status = builder.status;
-        this.customerID = builder.customerID;
-        this.addressID = builder.addressID;
-        this.paymentID = builder.paymentID;
+        this.customerId = builder.customerId;
+        this.addressId = builder.addressId;
+        this.paymentId = builder.paymentId;
     }
 
-    public String getOrderID() {
-        return orderID;
+    public Long getOrderId() {
+        return orderId;
     }
 
     public double getTotalAmount() {
@@ -45,16 +53,16 @@ public class Order {
         return status;
     }
 
-    public String getCustomerID() {
-        return customerID;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public String getAddressID() {
-        return addressID;
+    public String getAddressId() {
+        return addressId;
     }
 
-    public String getPaymentID() {
-        return paymentID;
+    public String getPaymentId() {
+        return paymentId;
     }
 
     public List<OrderLine> getOrderLines() {
@@ -64,28 +72,28 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "orderID='" + orderID + '\'' +
+                "orderID='" + orderId + '\'' +
                 ", totalAmount=" + totalAmount +
                 ", date=" + date +
                 ", status=" + status +
-                ", customerID='" + customerID + '\'' +
-                ", addressID='" + addressID + '\'' +
-                ", paymentID='" + paymentID + '\'' +
+                ", customerID='" + customerId + '\'' +
+                ", addressID='" + addressId + '\'' +
+                ", paymentID='" + paymentId + '\'' +
                 ", orderLines=" + orderLines +
                 '}';
     }
 
     public static class Builder {
-        private String orderID;
+        private Long orderId;
         private double totalAmount;
         private LocalDate date;
         private OrderStatus status;
-        private String customerID;
-        private String addressID;
-        private String paymentID;
+        private String customerId;
+        private String addressId;
+        private String paymentId;
 
-        public Builder setOrderID(String orderID) {
-            this.orderID = orderID;
+        public Builder setOrderId(Long orderId) {
+            this.orderId = orderId;
             return this;
         }
 
@@ -104,29 +112,29 @@ public class Order {
             return this;
         }
 
-        public Builder setCustomerID(String customerID) {
-            this.customerID = customerID;
+        public Builder setCustomerId(String customerId) {
+            this.customerId = customerId;
             return this;
         }
 
-        public Builder setAddressID(String addressID) {
-            this.addressID = addressID;
+        public Builder setAddressId(String addressId) {
+            this.addressId = addressId;
             return this;
         }
 
-        public Builder setPaymentID(String paymentID) {
-            this.paymentID = paymentID;
+        public Builder setPaymentId(String paymentId) {
+            this.paymentId = paymentId;
             return this;
         }
 
         public Builder copy(Order order) {
-            this.orderID = order.orderID;
+            this.orderId = order.orderId;
             this.totalAmount = order.totalAmount;
             this.date = order.date;
             this.status = order.status;
-            this.customerID = order.customerID;
-            this.addressID = order.addressID;
-            this.paymentID = order.paymentID;
+            this.customerId = order.customerId;
+            this.addressId = order.addressId;
+            this.paymentId = order.paymentId;
             return this;
         }
         public Order build(){

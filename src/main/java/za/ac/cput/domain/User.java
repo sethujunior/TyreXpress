@@ -1,16 +1,29 @@
 package za.ac.cput.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name="users")
 public class User {
-    private String user_Id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long userId;
+    @Column(nullable = false, unique = true)
     private String email;
+    @Enumerated(EnumType.STRING)
     private Role role;
+    private String password;
+    @OneToOne(mappedBy = "user")
+    @JsonIgnore
+    private Customer customer;
 
     public User(){
     }
     public User(Builder builder){
-        this.user_Id = builder.user_Id;
+        this.userId = builder.userId;
         this.email = builder.email;
         this.role = builder.role;
+        this.password = builder.password;
     }
 
     public String getEmail() {
@@ -21,26 +34,37 @@ public class User {
         return role;
     }
 
-    public String getUser_Id() {
-        return user_Id;
+    public Long getUserId() {
+        return userId;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "email='" + email + '\'' +
-                ", user_Id='" + user_Id + '\'' +
+                "user_Id='" + userId + '\'' +
+                ", email='" + email + '\'' +
                 ", role=" + role +
+                ", password='" + password + '\'' +
+                ", customer=" + customer +
                 '}';
     }
 
     public static class Builder {
-        private String user_Id;
+        private Long userId;
         private String email;
         private Role role;
+        private String password;
 
-        public Builder setuser_Id(String user_Id) {
-            this.user_Id = user_Id;
+        public Builder setuser_Id(Long userId) {
+            this.userId = userId;
             return this;
         }
         public Builder setemail(String email) {
@@ -51,14 +75,22 @@ public class User {
             this.role = role;
             return this;
         }
+
+        public Builder setpassword(String password) {
+            this.password = password;
+            return this;
+        }
+
         public Builder copy(User user) {
-            this.user_Id = user.user_Id;
+            this.userId = user.userId;
             this.email = user.email;
             this.role = user.role;
+            this.password = user.password;
             return this;
         }
         public User build() {
-            return  new User(this);
+            return new User(this);
         }
+
     }
 }

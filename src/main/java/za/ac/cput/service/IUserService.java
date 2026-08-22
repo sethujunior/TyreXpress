@@ -1,7 +1,6 @@
 package za.ac.cput.service;
+import za.ac.cput.domain.User;
 
-import za.ac.cput.domain.*;
-
-public interface IUserService extends IService<User,String>{
+public interface IUserService extends IService<User,Long>{
 
 }

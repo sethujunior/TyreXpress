@@ -1,46 +1,60 @@
 package za.ac.cput.service;
 
+import org.springframework.stereotype.Service;
 import za.ac.cput.domain.*;
 import za.ac.cput.repository.*;
 import java.util.*;
 
+@Service
 public class CustomerService implements ICustomerService{
 
-    private static CustomerService service = null;
-    private ICustomer repository;
+    private ICustomerRepository repository;
+    private IAddressRepository addressRepository;
+    private IUserRepository userRepository;
 
-    private CustomerService() {
-        repository = CustomerRepository.getRepository();
-    }
-    public static CustomerService getService() {
-        if (service == null) {
-            service = new CustomerService();
-        }
-        return service;
+    public CustomerService(ICustomerRepository repository, IAddressRepository addressRepository, IUserRepository userRepository) {
+        this.repository = repository;
+        this.addressRepository = addressRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public Customer create(Customer customer) {
-        return null;
+        User user = userRepository.findById(customer.getUser().getUserId())
+                .orElseThrow(()-> new RuntimeException("User not found"));
+        Address address = addressRepository.findById(customer.getAddress().getAddressId()   )
+                .orElseThrow(()-> new RuntimeException("Address not found"));
+        Customer newCustomer = new Customer.Builder()
+                .copy(customer)
+                .setUser(user)
+                .setaddress(address)
+                .build();
+
+        return repository.save(newCustomer);
+
     }
 
     @Override
-    public Customer read(String s) {
-        return null;
+    public Customer read(Long customerId) {
+        return repository.findById(customerId).orElse(null);
     }
 
     @Override
     public Customer update(Customer customer) {
-        return null;
+        return repository.save(customer);
     }
 
     @Override
-    public boolean delete(String s) {
+    public boolean delete(Long customerId) {
+        if (repository.existsById(customerId)){
+            repository.deleteById(customerId);
+            return true;
+        }
         return false;
     }
 
     @Override
     public List<Customer> getAll() {
-        return List.of();
+        return repository.findAll();
     }
 }

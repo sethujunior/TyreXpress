@@ -5,20 +5,20 @@ import za.ac.cput.domain.Rim;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RimRepositoryImpl implements IRimRepository {
+public class RimRepository implements IRimRepository {
 
-    private static RimRepositoryImpl repository;
+    private static RimRepository repository;
 
     private List<Rim> rims;
 
-    private RimRepositoryImpl() {
+    private RimRepository() {
         rims = new ArrayList<>();
     }
 
-    public static RimRepositoryImpl getRepository() {
+    public static RimRepository getRepository() {
 
         if (repository == null) {
-            repository = new RimRepositoryImpl();
+            repository = new RimRepository();
         }
 
         return repository;

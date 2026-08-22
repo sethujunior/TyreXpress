@@ -5,14 +5,18 @@ import za.ac.cput.util.Helper;
 
 public class UserFactory {
 
-    public static User createUser(String user_id,  String email, Role role) {
-        if(Helper.isNullOrEmpty(user_id) || Helper.isNullOrEmpty(email)){
-            throw new IllegalArgumentException("user_id or email is null or empty");
+    public static User createUser(Long userId,  String email, Role role,String password) {
+        if(Helper.isNullOrEmpty(String.valueOf(userId)) || Helper.isNullOrEmpty(email)){
+            throw new IllegalArgumentException("userId or email is null or empty");
+        }
+        if(!Helper.isValidEmail(email)){
+            throw new IllegalArgumentException("email is null or invalid");
         }
         return new User.Builder()
-                .setuser_Id(user_id)
+                .setuser_Id(userId)
                 .setemail(email)
                 .setrole(role)
+                .setpassword(password)
                 .build();
     }
 }

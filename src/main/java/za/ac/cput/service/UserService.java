@@ -1,45 +1,45 @@
 package za.ac.cput.service;
 
-import za.ac.cput.domain.*;
+import org.springframework.stereotype.*;
+import za.ac.cput.domain.User;
 import za.ac.cput.repository.*;
 import java.util.*;
 
+@Service
 public class UserService implements IUserService {
-    private static UserService service = null;
-    private IUser repository;
 
-    private UserService() {
-        repository = UserRepository.getRepository();
-    }
-    public static UserService getService() {
-        if (service == null) {
-            service = new UserService();
-        }
-        return service;
+    private final IUserRepository repository;
+
+    public UserService(IUserRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public User create(User user) {
-        return repository.create(user);
+        return repository.save(user);
     }
 
     @Override
-    public User read(String user_id) {
-        return repository.read(user_id);
+    public User read(Long userId) {
+        return repository.findById(userId).orElse(null);
     }
 
     @Override
     public User update(User user) {
-       return repository.update(user);
+        return repository.save(user);
     }
 
     @Override
-    public boolean delete(String user_id) {
-        return repository.delete(user_id);
+    public boolean delete(Long userId) {
+        if (repository.existsById(userId)) {
+            repository.deleteById(userId);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public List<User> getAll() {
-        return repository.getAll();
+        return repository.findAll();
     }
 }

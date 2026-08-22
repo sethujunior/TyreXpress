@@ -5,23 +5,20 @@ import za.ac.cput.util.Helper;
 
 public class AddressFactory {
 
-     public Address createAddress(String address_id, String street, String city, String province, String postalCode, String customer_id) {
-         if (Helper.isNullOrEmpty(address_id) || Helper.isNullOrEmpty(street) || Helper.isNullOrEmpty(customer_id)) {
-             throw new NullPointerException("address or customer id is null or empty");
+     public static Address createAddress(Long addressId, String street, String city, String province, String postalCode, Customer customer) {
+         if (Helper.isNullOrEmpty(String.valueOf(addressId)) || Helper.isNullOrEmpty(street) || customer == null) {
+             throw new IllegalArgumentException( "Customer is null or address is empty.");
          }
-         if (Helper.isValidEmail(address_id)){
-             throw new NullPointerException("address_id is null or invalid");
-         }
-         if(Helper.isValidPostalCode(postalCode)){
-             throw new NullPointerException("postalCode is null or invalid");
+         if(!Helper.isValidPostalCode(postalCode)){
+             throw new IllegalArgumentException("postalCode is null or invalid");
          }
          return new Address.Builder()
-                 .setaddress_id(address_id)
+                 .setaddress_id(addressId)
                  .setstreet(street)
                  .setcity(city)
                  .setprovince(province)
                  .setpostalCode(postalCode)
-                 .setcustomer_Id(customer_id)
+                 .setCustomer(customer)
                  .build();
      }
 }

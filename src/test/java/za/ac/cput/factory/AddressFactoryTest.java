@@ -9,12 +9,11 @@ class AddressFactoryTest {
     @Test
     void createAddress() {
         Address address = new Address.Builder()
-                .setaddress_id("11")
+                .setaddress_id(1l)
                 .setstreet("Salubindza")
                 .setcity("Hazyview")
                 .setprovince("Mpumalanga")
                 .setpostalCode("1242")
-                .setcustomer_Id("1")
                 .build();
         System.out.println(address);
     }

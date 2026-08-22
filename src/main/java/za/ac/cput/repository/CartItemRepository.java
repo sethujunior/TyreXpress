@@ -4,7 +4,7 @@ import za.ac.cput.domain.CartItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartItemRepository implements IRepository<CartItem, String> {
+public class CartItemRepository implements ICartItermRepo {
     private static CartItemRepository repository = null;
     private List<CartItem> cartItemDB;
 
@@ -50,6 +50,11 @@ public class CartItemRepository implements IRepository<CartItem, String> {
     }
 
     @Override
+    public boolean delee(String cartItemId) {
+        return delete(cartItemId);
+    }
+
+    @Override
     public boolean delete(String cartItemId) {
         CartItem itemToDelete = read(cartItemId);
         if (itemToDelete == null) {
@@ -57,7 +62,6 @@ public class CartItemRepository implements IRepository<CartItem, String> {
         }
         return cartItemDB.remove(itemToDelete);
     }
-
 
     @Override
     public List<CartItem> getAll() {

@@ -1,7 +1,13 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.*;
+
+
+@Table(name = "product")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Product {
 
+    @Id
     protected String productID;
     protected String name;
     protected String brand;

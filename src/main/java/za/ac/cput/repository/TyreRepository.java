@@ -5,20 +5,20 @@ import za.ac.cput.domain.Tyre;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TyreRepositoryImpl implements ITyreRepository {
+public class TyreRepository implements ITyreRepository {
 
-    private static TyreRepositoryImpl repository;
+    private static TyreRepository repository;
 
     private List<Tyre> tyres;
 
-    private TyreRepositoryImpl() {
+    private TyreRepository() {
         tyres = new ArrayList<>();
     }
 
-    public static TyreRepositoryImpl getRepository() {
+    public static TyreRepository getRepository() {
 
         if (repository == null) {
-            repository = new TyreRepositoryImpl();
+            repository = new TyreRepository();
         }
 
         return repository;

@@ -1,26 +1,35 @@
 package za.ac.cput.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="addresses")
 public class Address {
-    private String address_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long addressId;
     private String street;
     private String city;
     private String province;
     private String postalCode;
-    private String customer_Id;
+    @OneToOne(mappedBy = "address")
+    @JsonIgnore
+    private Customer customer;
 
     public Address() {
     }
     public Address(Builder builder) {
-        this.address_id = builder.address_id;
+        this.addressId = builder.addressId;
         this.street = builder.street;
         this.city = builder.city;
         this.province = builder.province;
         this.postalCode = builder.postalCode;
-        this.customer_Id = builder.customer_Id;
+        this.customer = builder.customer;
     }
 
-    public String getAddress_id() {
-        return address_id;
+    public Long getAddressId() {
+        return addressId;
     }
 
     public String getCity() {
@@ -38,31 +47,32 @@ public class Address {
     public String getStreet() {
         return street;
     }
-    public String getCustomer_Id() {
-        return customer_Id;
+    public Customer getCustomer() {
+        return customer;
     }
+
 
     @Override
     public String toString() {
         return "Address{" +
-                "address_id='" + address_id + '\'' +
+                "address_id='" + addressId + '\'' +
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", province='" + province + '\'' +
                 ", postalCode='" + postalCode + '\'' +
-                ", customer_Id='" + customer_Id + '\'' +
                 '}';
     }
+
     public static  class Builder{
-        private String address_id;
+        private Long addressId;
         private String street;
         private String city;
         private String province;
         private String postalCode;
-        private String customer_Id;
+        private Customer customer;
 
-        public Builder setaddress_id(String address_id) {
-            this.address_id = address_id;
+        public Builder setaddress_id(Long addressId) {
+            this.addressId = addressId;
             return this;
         }
         public Builder setstreet(String street) {
@@ -81,18 +91,19 @@ public class Address {
             this.postalCode = postalCode;
             return this;
         }
-        public Builder setcustomer_Id(String customer_Id) {
-            this.customer_Id = customer_Id;
+        public Builder setCustomer(Customer customer) {
+            this.customer = customer;
             return this;
         }
 
+
         public Builder copy(Address address){
-            this.address_id = address.address_id;
+            this.addressId = address.addressId;
             this.street = address.street;
             this.city = address.city;
             this.province = address.province;
             this.postalCode = address.postalCode;
-            this.customer_Id = address.customer_Id;
+            this.customer = address.customer;
             return this;
         }
         public Address build(){

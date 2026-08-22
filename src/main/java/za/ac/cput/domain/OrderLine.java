@@ -1,25 +1,35 @@
 package za.ac.cput.domain;
 
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "order_lines")
 public class OrderLine {
-    private String orderLineID;
+    @Id
+    private Long orderLineId;
     private int quantity;
     private double unitPrice;
     private double lineTotal;
-    private String productID;
+    private String productId;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     public OrderLine(){
 
     }
     public OrderLine(Builder builder){
-        this.orderLineID = builder.orderLineID;
+        this.orderLineId = builder.orderLineId;
         this.quantity = builder.quantity;
         this.unitPrice = builder.unitPrice;
         this.lineTotal = builder.lineTotal;
-        this.productID = builder.productID;
+        this.productId = builder.productId;
     }
 
-    public String getOrderLineID() {
-        return orderLineID;
+    public Long getOrderLineId() {
+        return orderLineId;
     }
 
     public int getQuantity() {
@@ -35,28 +45,28 @@ public class OrderLine {
     }
 
     public String getProductID() {
-        return productID;
+        return productId;
     }
 
     @Override
     public String toString() {
         return "OrderLine{" +
-                "orderLineID='" + orderLineID + '\'' +
+                "orderLineID='" + orderLineId + '\'' +
                 ", quantity=" + quantity +
                 ", unitPrice=" + unitPrice +
                 ", lineTotal=" + lineTotal +
-                ", productID='" + productID + '\'' +
+                ", productID='" + productId + '\'' +
                 '}';
     }
     public static class Builder{
-        private String orderLineID;
+        private Long orderLineId;
         private int quantity;
         private double unitPrice;
         private double lineTotal;
-        private String productID;
+        private String productId;
 
-        public Builder setOrderLineID(String orderLineID) {
-            this.orderLineID = orderLineID;
+        public Builder setOrderLineId(Long orderLineID) {
+            this.orderLineId = orderLineId;
             return this;
         }
 
@@ -75,16 +85,16 @@ public class OrderLine {
             return this;
         }
 
-        public Builder setProductID(String productID) {
-            this.productID = productID;
+        public Builder setProductId(String productId) {
+            this.productId = productId;
             return this;
         }
         public Builder copy(OrderLine orderLine){
-            this.orderLineID = orderLine.orderLineID;
+            this.orderLineId = orderLine.orderLineId;
             this.quantity = orderLine.quantity;
             this.unitPrice = orderLine.unitPrice;
             this.lineTotal = orderLine.lineTotal;
-            this.productID = orderLine.productID;
+            this.productId = orderLine.productId;
             return this;
         }
         public OrderLine build(){

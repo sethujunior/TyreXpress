@@ -8,21 +8,28 @@ class CustomerFactoryTest {
 
     @Test
     void createCustomer() {
+        User user = new User.Builder()
+                .setuser_Id(1l)
+                .setemail("Naruto@gmail.com")
+                .setrole(Role.CUSTOMER)
+                .setpassword("12345")
+                .build();
+
         Address address = new Address.Builder()
-                .setaddress_id("11")
+                .setaddress_id(01L)
                 .setstreet("Salubindza")
                 .setcity("Hazyview")
                 .setprovince("Mpumalanga")
                 .setpostalCode("1242")
-                .setcustomer_Id("01")
                 .build();
 
         Customer customer1 = new Customer.Builder()
-                .setcustomer_Id("1")
+                .setcustomerId(01l)
                 .setfirstName("Naruto")
                 .setlastName("Uzumaki")
+                .setPhone("0824537952")
                 .setemail("Naruto@gmail.com")
-                .setuser_Id("1")
+                .setUser(user)
                 .setaddress(address)
                 .build();
 
