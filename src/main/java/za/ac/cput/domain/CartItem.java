@@ -1,10 +1,21 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.*;
+import java.util.Objects;
+
+@Entity
+@Table(name = "cart_item")
 public class CartItem {
-    private String cartItemId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long cartItemId;
+
     private int quantity;
     private String productId;
-    private String cartId;
+    private Long cartId;
+
+    protected CartItem() {}
 
     private CartItem(Builder builder) {
         this.cartItemId = builder.cartItemId;
@@ -13,10 +24,8 @@ public class CartItem {
         this.cartId = builder.cartId;
     }
 
-
-    public String getCartItemId() {
+    public Long getCartItemId() {
         return cartItemId;
-
     }
 
     public int getQuantity() {
@@ -27,28 +36,43 @@ public class CartItem {
         return productId;
     }
 
-    public String getCartId() {
+    public Long getCartId() {
         return cartId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CartItem cartItem = (CartItem) o;
+        return quantity == cartItem.quantity &&
+                Objects.equals(cartItemId, cartItem.cartItemId) &&
+                Objects.equals(productId, cartItem.productId) &&
+                Objects.equals(cartId, cartItem.cartId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cartItemId, quantity, productId, cartId);
     }
 
     @Override
     public String toString() {
         return "CartItem{" +
-                "cartItemId='" + cartItemId + '\'' +
+                "cartItemId=" + cartItemId +
                 ", quantity=" + quantity +
                 ", productId='" + productId + '\'' +
-                ", cartId='" + cartId + '\'' +
+                ", cartId=" + cartId +
                 '}';
     }
 
-
     public static class Builder {
-        private String cartItemId;
+        private Long cartItemId;
         private int quantity;
         private String productId;
-        private String cartId;
+        private Long cartId;
 
-        public Builder setCartItemId(String cartItemId) {
+        public Builder setCartItemId(Long cartItemId) {
             this.cartItemId = cartItemId;
             return this;
         }
@@ -63,7 +87,7 @@ public class CartItem {
             return this;
         }
 
-        public Builder setCartId(String cartId) {
+        public Builder setCartId(Long cartId) {
             this.cartId = cartId;
             return this;
         }
@@ -75,6 +99,8 @@ public class CartItem {
             this.cartId = cartItem.cartId;
             return this;
         }
+
+
 
         public CartItem build() {
             return new CartItem(this);
