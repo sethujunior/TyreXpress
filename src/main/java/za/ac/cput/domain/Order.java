@@ -1,18 +1,25 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
+@Table(name = "orders")
 public class Order {
-    private String orderId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderId;
     private double totalAmount;
     private LocalDate date;
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
     private String customerId;
     private String addressId;
     private String paymentId;
-
     // Composition → Order contains many OrderLines
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderLine> orderLines;
 
     public Order() {
@@ -29,7 +36,7 @@ public class Order {
         this.paymentId = builder.paymentId;
     }
 
-    public String getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
@@ -76,7 +83,7 @@ public class Order {
     }
 
     public static class Builder {
-        private String orderId;
+        private Long orderId;
         private double totalAmount;
         private LocalDate date;
         private OrderStatus status;
@@ -84,7 +91,7 @@ public class Order {
         private String addressId;
         private String paymentId;
 
-        public Builder setOrderId(String orderId) {
+        public Builder setOrderId(Long orderId) {
             this.orderId = orderId;
             return this;
         }

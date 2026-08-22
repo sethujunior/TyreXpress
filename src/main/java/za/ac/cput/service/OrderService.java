@@ -1,5 +1,6 @@
 package za.ac.cput.service;
 
+import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Order;
 import za.ac.cput.repository.IOrderRepository;
 import za.ac.cput.repository.OrderLineRepository;
@@ -7,6 +8,7 @@ import za.ac.cput.repository.OrderRepository;
 
 import java.util.List;
 
+@Service
 public class OrderService implements IOrderService{
     private static OrderService service = null;
     private IOrderRepository repository;
@@ -28,7 +30,7 @@ public class OrderService implements IOrderService{
     }
 
     @Override
-    public Order read(String orderId) {
+    public Order read(Long orderId) {
         return repository.read(orderId);
     }
 
@@ -38,7 +40,7 @@ public class OrderService implements IOrderService{
     }
 
     @Override
-    public boolean delete(String orderId) {
+    public boolean delete(Long orderId) {
         return repository.delete(orderId);
     }
 

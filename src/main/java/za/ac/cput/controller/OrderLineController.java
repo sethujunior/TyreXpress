@@ -1,5 +1,6 @@
 package za.ac.cput.controller;
 
+import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.Order;
 import za.ac.cput.domain.OrderLine;
 import za.ac.cput.service.IOrderLineService;
@@ -8,36 +9,37 @@ import za.ac.cput.service.OrderLineService;
 import za.ac.cput.service.OrderService;
 
 import java.util.List;
-
+@RestController
+@RequestMapping("/orderLine")
 public class OrderLineController {
     private static OrderLineController controller = null;
     private IOrderLineService service;
 
-    private OrderLineController() {
-        service = OrderLineService.getService();
+    public OrderLineController(OrderLineService service) {
+        this.service = service;
     }
-    public static OrderLineController getController() {
-        if (controller == null) {
-            controller = new OrderLineController();
-        }
-        return controller;
-    }
-    public OrderLine create(OrderLine orderLine) {
+
+    @PostMapping("/create")
+    public OrderLine create(@RequestBody OrderLine orderLine) {
         return service.create(orderLine);
     }
 
-    public OrderLine read(String orderlineId) {
+    @GetMapping("/read/{id}")
+    public OrderLine read(@PathVariable Long orderlineId) {
         return service.read(orderlineId);
     }
 
-    public OrderLine update(OrderLine orderLine) {
+    @PutMapping("/update")
+    public OrderLine update(@RequestBody OrderLine orderLine) {
         return service.update(orderLine);
     }
 
-    public boolean delete(String orderLineId) {
+    @DeleteMapping("/delete/{id}")
+    public boolean delete(@PathVariable Long orderLineId) {
         return service.delete(orderLineId);
     }
 
+    @GetMapping("/getAll")
     public List<OrderLine> getAll() {
         return service.getAll();
     }
