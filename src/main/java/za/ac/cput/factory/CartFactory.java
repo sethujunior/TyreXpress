@@ -20,6 +20,8 @@ public class CartFactory {
             throw new IllegalArgumentException("customerId is null or empty");
         }
 
+
+
         return new Cart.Builder()
                 .setCartId(cartId)
                 .setCustomerId(customerId)

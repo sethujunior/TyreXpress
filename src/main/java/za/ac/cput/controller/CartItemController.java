@@ -56,6 +56,8 @@ public class CartItemController {
         return ResponseEntity.notFound().build();
     }
 
+
+
     @GetMapping("/getAll")
     public ResponseEntity<List<CartItem>> getAll() {
         List<CartItem> items = cartItemService.getAll();
