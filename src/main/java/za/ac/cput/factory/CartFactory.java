@@ -1,14 +1,26 @@
 package za.ac.cput.factory;
 
-import za.ac.cput.domain.*;
+import za.ac.cput.domain.Cart;
 import za.ac.cput.util.Helper;
 
 public class CartFactory {
 
-    public Cart createCart(String cartId, String customerId) {
-        if (Helper.isNullOrEmpty(cartId) || Helper.isNullOrEmpty(customerId)) {
-            throw new NullPointerException("cartId or customerId is null or empty");
+    public static Cart createCart(String customerId) {
+        if (Helper.isNullOrEmpty(customerId)) {
+            throw new IllegalArgumentException("customerId is null or empty");
         }
+
+        return new Cart.Builder()
+                .setCustomerId(customerId)
+                .build();
+    }
+
+    public static Cart createCart(Long cartId, String customerId) {
+        if (Helper.isNullOrEmpty(customerId)) {
+            throw new IllegalArgumentException("customerId is null or empty");
+        }
+
+
 
         return new Cart.Builder()
                 .setCartId(cartId)
