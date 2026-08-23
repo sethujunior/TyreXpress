@@ -10,30 +10,34 @@ import java.util.List;
 @RequestMapping("/rims")
 public class RimController {
 
-    private final RimServiceImpl service = RimServiceImpl.getService();
+    private RimServiceImpl rimService;
+
+    public RimController(RimServiceImpl rimService) {
+        this.rimService = rimService;
+    }
 
     @PostMapping("/create")
     public Rim create(@RequestBody Rim rim) {
-        return service.create(rim);
+        return rimService.create(rim);
     }
 
     @GetMapping("/read/{id}")
-    public Rim read(@PathVariable String id) {
-        return service.read(id);
+    public Rim read(@PathVariable Long id) {
+        return rimService.read(id);
     }
 
     @PutMapping("/update")
     public Rim update(@RequestBody Rim rim) {
-        return service.update(rim);
+        return rimService.update(rim);
     }
 
     @DeleteMapping("/delete/{id}")
-    public boolean delete(@PathVariable String id) {
-        return service.delete(id);
+    public boolean delete(@PathVariable Long id) {
+        return rimService.delete(id);
     }
 
     @GetMapping("/getAll")
     public List<Rim> getAll() {
-        return service.getAll();
+        return rimService.getAll();
     }
 }

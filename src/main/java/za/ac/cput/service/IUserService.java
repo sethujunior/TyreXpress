@@ -3,4 +3,6 @@ import za.ac.cput.domain.User;
 
 public interface IUserService extends IService<User,Long>{
 
+    User login(String email, String password);
+
 }

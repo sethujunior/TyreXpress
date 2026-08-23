@@ -12,13 +12,13 @@ import za.ac.cput.util.Helper;
 
 public class PaymentFactory {
 
-    public static Payment buildPayment(String paymentID,
+    public static Payment buildPayment(Long paymentID,
                                        double amount,
                                        PaymentMethod method,
                                        PaymentStatus status,
                                        String orderID) {
 
-        if (Helper.isNullOrEmpty(paymentID)) {
+        if (Helper.isNullOrEmpty(String.valueOf(paymentID))) {
             System.out.println("Payment ID cannot be null or empty");
             return null;
         }

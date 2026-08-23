@@ -4,15 +4,6 @@ import za.ac.cput.domain.Tyre;
 
 import java.util.List;
 
-public interface ITyreService {
+public interface ITyreService extends IService<Tyre,Long> {
 
-    Tyre create(Tyre tyre);
-
-    Tyre read(String id);
-
-    Tyre update(Tyre tyre);
-
-    boolean delete(String id);
-
-    List<Tyre> getAll();
 }

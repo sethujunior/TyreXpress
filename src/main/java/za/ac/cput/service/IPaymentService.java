@@ -6,6 +6,8 @@ package za.ac.cput.service;
 
 import za.ac.cput.domain.Payment;
 
-public interface IPaymentService extends IService<Payment, String> {
+public interface IPaymentService extends IService<Payment, Long> {
 
+    Payment read(Long paymentId);
+    boolean delete(Long paymentId);
 }

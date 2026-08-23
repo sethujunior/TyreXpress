@@ -14,9 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OrderServiceTest {
  private OrderService service;
-    @BeforeEach
-    void Setup() { service = OrderService.getService();
-    }
 
     @Test
     void create() {

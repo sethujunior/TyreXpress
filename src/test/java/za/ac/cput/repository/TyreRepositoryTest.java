@@ -18,7 +18,7 @@ public class TyreRepositoryTest {
 
         // Create
         Tyre tyre = TyreFactory.createTyre(
-                "P001",
+                1l,
                 "Pilot Sport 5",
                 "Michelin",
                 2899.99,
@@ -40,7 +40,7 @@ public class TyreRepositoryTest {
 //        System.out.println(repository.read("P001"));
 
         Tyre updatedTyre = TyreFactory.createTyre(
-                "P001",
+                1l,
                 "Pilot Sport 5",
                 "Michelin",
                 3100.00,

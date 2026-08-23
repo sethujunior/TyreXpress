@@ -1,56 +1,44 @@
 package za.ac.cput.service;
 
+import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Tyre;
+import za.ac.cput.repository.ITyreRepository;
 //import za.ac.cput.repository.TyreRepositoryImpl;
 
 import java.util.List;
 
+@Service
 public class TyreServiceImpl implements ITyreService {
 
-    private static TyreServiceImpl service;
+    private ITyreRepository repository;
 
-//    private TyreRepositoryImpl repository;
-
-    private TyreServiceImpl() {
-//        repository = TyreRepositoryImpl.getRepository();
-    }
-
-    public static TyreServiceImpl getService() {
-
-        if (service == null) {
-            service = new TyreServiceImpl();
-        }
-
-        return service;
+    public TyreServiceImpl(ITyreRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public Tyre create(Tyre tyre) {
-        return null;
-//        return repository.create(tyre);
+        return repository.save(tyre);
     }
 
     @Override
-    public Tyre read(String id) {
-        return null;
-//        return repository.read(id);
+    public Tyre read(Long aLong) {
+        return repository.findById(aLong).orElse(null);
     }
 
     @Override
     public Tyre update(Tyre tyre) {
-        return null;
-//        return repository.update(tyre);
+        return repository.save(tyre);
     }
 
     @Override
-    public boolean delete(String id) {
-        return false;
-//        return repository.delete(id);
+    public boolean delete(Long aLong) {
+        return repository.existsById(aLong);
     }
 
     @Override
     public List<Tyre> getAll() {
-        return null;
-//        return repository.getAll();
+        return repository.findAll();
     }
+
  }

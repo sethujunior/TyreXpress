@@ -22,7 +22,7 @@ class PaymentRepositoryTest {
     @Test
     void testCreate() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-001",
+                00l,
                 1500.00,
                 PaymentMethod.CARD,
                 PaymentStatus.PAID,
@@ -35,21 +35,21 @@ class PaymentRepositoryTest {
     @Test
     void testRead() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-002",
+                002l,
                 500.00,
                 PaymentMethod.EFT,
                 PaymentStatus.PENDING,
                 "order-002"
         );
         repository.save(payment);
-        Payment read = repository.findById("PAY-002").orElse(null);
+        Payment read = repository.findById(002l).orElse(null);
         System.out.println("Read: " + read);
     }
 
     @Test
     void testUpdate() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-003",
+                003l,
                 750.00,
                 PaymentMethod.CASH,
                 PaymentStatus.PENDING,
@@ -69,21 +69,21 @@ class PaymentRepositoryTest {
     @Test
     void testDelete() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-004",
+                004l,
                 250.00,
                 PaymentMethod.CARD,
                 PaymentStatus.PAID,
                 "order-004"
         );
         repository.save(payment);
-        repository.deleteById("PAY-004");
+        repository.deleteById(004l);
         System.out.println("Deleted: true");
     }
 
     @Test
     void testGetAll() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-005",
+                005l,
                 999.00,
                 PaymentMethod.EFT,
                 PaymentStatus.PAID,

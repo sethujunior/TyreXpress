@@ -10,30 +10,34 @@ import java.util.List;
 @RequestMapping("/tyres")
 public class TyreController {
 
-    private final TyreServiceImpl service = TyreServiceImpl.getService();
+    private TyreServiceImpl tyreService;
+
+    public TyreController(TyreServiceImpl tyreService) {
+        this.tyreService = tyreService;
+    }
 
     @PostMapping("/create")
     public Tyre create(@RequestBody Tyre tyre) {
-        return service.create(tyre);
+        return tyreService.create(tyre);
     }
 
     @GetMapping("/read/{id}")
-    public Tyre read(@PathVariable String id) {
-        return service.read(id);
+    public Tyre read(@PathVariable Long id) {
+        return tyreService.read(id);
     }
 
     @PutMapping("/update")
     public Tyre update(@RequestBody Tyre tyre) {
-        return service.update(tyre);
+        return tyreService.update(tyre);
     }
 
     @DeleteMapping("/delete/{id}")
-    public boolean delete(@PathVariable String id) {
-        return service.delete(id);
+    public boolean delete(@PathVariable Long id) {
+        return tyreService.delete(id);
     }
 
     @GetMapping("/getAll")
     public List<Tyre> getAll() {
-        return service.getAll();
+        return tyreService.getAll();
     }
 }

@@ -13,7 +13,8 @@ public class Payment {
 
     @Id
     @Column(name = "payment_id")
-    private String paymentID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long paymentID;
 
     @Column(name = "amount")
     private double amount;
@@ -39,7 +40,7 @@ public class Payment {
         this.orderID   = builder.orderID;
     }
 
-    public String getPaymentID() {
+    public Long getPaymentID() {
         return paymentID;
     }
 
@@ -89,13 +90,13 @@ public class Payment {
 
     public static class Builder {
 
-        private String paymentID;
+        private Long paymentID;
         private double amount;
         private PaymentMethod method;
         private PaymentStatus status;
         private String orderID;
 
-        public Builder setPaymentID(String paymentID) {
+        public Builder setPaymentID(Long paymentID) {
             this.paymentID = paymentID;
             return this;
         }

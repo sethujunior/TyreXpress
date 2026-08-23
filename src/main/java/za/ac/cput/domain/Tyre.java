@@ -2,8 +2,8 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.*;
 
-
-@Table(name = "tyre")
+@Entity
+@Table(name = "tyres")
 public class Tyre extends Product {
 
     private String size;

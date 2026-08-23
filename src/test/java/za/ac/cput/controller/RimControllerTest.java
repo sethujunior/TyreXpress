@@ -13,7 +13,7 @@ class RimControllerTest {
 //    private static final RimController controller = RimController.getController();
 
     private static Rim rim = RimFactory.createRim(
-            "P002",
+            1l,
             "RS Alloy",
             "BBS",
             3999.99,
@@ -54,7 +54,7 @@ class RimControllerTest {
     void update() {
 
         Rim updated = RimFactory.createRim(
-                "P002",
+                1l,
                 "RS Alloy",
                 "BBS",
                 4200.00,
@@ -73,7 +73,7 @@ class RimControllerTest {
 //        assertEquals(4200.00, result.getPrice());
 //
 ////        System.out.println(result);
-////    }
+////
 //
 //    @Test
 //    @Order(4)

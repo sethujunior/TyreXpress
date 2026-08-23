@@ -2,13 +2,14 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.*;
 
-
-@Table(name = "product")
+@Entity
+@Table(name = "products")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Product {
 
     @Id
-    protected String productID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long productID;
     protected String name;
     protected String brand;
     protected double price;
@@ -25,7 +26,7 @@ public abstract class Product {
         this.stock = builder.stock;
     }
 
-    public String getProductID() {
+    public Long getProductID() {
         return productID;
     }
 
@@ -58,13 +59,13 @@ public abstract class Product {
 
     public static abstract class Builder {
 
-        protected String productID;
+        protected Long productID;
         protected String name;
         protected String brand;
         protected double price;
         protected int stock;
 
-        public Builder setProductID(String productID) {
+        public Builder setProductID(Long productID) {
             this.productID = productID;
             return this;
         }

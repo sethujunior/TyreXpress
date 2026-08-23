@@ -1,56 +1,42 @@
 package za.ac.cput.service;
 
+import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Rim;
+import za.ac.cput.repository.IRimRepository;
 //import za.ac.cput.repository.RimRepositoryImpl;
 
 import java.util.List;
-
+@Service
 public class RimServiceImpl implements IRimService {
 
-    private static RimServiceImpl service;
+    private IRimRepository rimRepository;
 
-//    private RimRepositoryImpl repository;
-
-    private RimServiceImpl() {
-//        repository = RimRepositoryImpl.getRepository();
-    }
-
-    public static RimServiceImpl getService() {
-
-        if (service == null) {
-            service = new RimServiceImpl();
-        }
-
-        return service;
+    public RimServiceImpl(IRimRepository rimRepository) {
+        this.rimRepository = rimRepository;
     }
 
     @Override
     public Rim create(Rim rim) {
-        return null;
-//        return repository.create(rim);
+        return rimRepository.save(rim);
     }
 
     @Override
-    public Rim read(String id) {
-        return null;
-//        return repository.read(id);
+    public Rim read(Long aLong) {
+        return rimRepository.findById(aLong).orElse(null);
     }
 
     @Override
     public Rim update(Rim rim) {
-        return null;
-//        return repository.update(rim);
+        return rimRepository.save(rim);
     }
 
     @Override
-    public boolean delete(String id) {
-        return false;
+    public boolean delete(Long aLong) {
+        return rimRepository.existsById(aLong);
     }
-
 
     @Override
     public List<Rim> getAll() {
-        return null;
-//        return repository.getAll();
+        return rimRepository.findAll();
     }
 }

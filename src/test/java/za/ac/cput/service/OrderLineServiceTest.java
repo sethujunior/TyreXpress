@@ -3,7 +3,6 @@ package za.ac.cput.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import za.ac.cput.domain.OrderLine;
-import za.ac.cput.domain.Payment;
 import za.ac.cput.factory.OrderLineFatcory;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderLineServiceTest {
     private OrderLineService service;
 
-    @BeforeEach
-    void SetUp() { service = OrderLineService.getService();}
+    private OrderLine orderLine = OrderLineFatcory.createOrderLine(1l,2,12.00,12.000,"01");
+
 
     @Test
     void create() {
         OrderLine orderLine = OrderLineFatcory.createOrderLine(
-                "OL1",
+                1l,
                 2,
                 250.00,
                 500.00,
@@ -30,14 +29,14 @@ class OrderLineServiceTest {
     @Test
     void read() {
         OrderLine orderLine = OrderLineFatcory.createOrderLine(
-                "OL1",
+                1l,
                 2,
                 250.00,
                 500.00,
                 "P1"
         );
         service.create(orderLine);
-        OrderLine read = service.read("OL1");
+        OrderLine read = service.read(1l);
         System.out.println("Read: " + read);
 
     }
@@ -45,7 +44,7 @@ class OrderLineServiceTest {
     @Test
     void update() {
         OrderLine orderLine = OrderLineFatcory.createOrderLine(
-                "OL1",
+                1l,
                 2,
                 250.00,
                 500.00,
@@ -63,7 +62,7 @@ class OrderLineServiceTest {
     @Test
     void delete() {
         OrderLine orderLine = OrderLineFatcory.createOrderLine(
-                "OL1",
+                1l,
                 2,
                 250.00,
                 500.00,
@@ -71,7 +70,7 @@ class OrderLineServiceTest {
         );
         service.create(orderLine);
 
-        boolean delete = service.delete("OL1");
+        boolean delete = service.delete(1l);
         System.out.println("Delete: " + delete);
 
     }
@@ -79,7 +78,7 @@ class OrderLineServiceTest {
     @Test
     void getAll() {
         OrderLine orderLine = OrderLineFatcory.createOrderLine(
-                "OL1",
+                1l,
                 2,
                 250.00,
                 500.00,

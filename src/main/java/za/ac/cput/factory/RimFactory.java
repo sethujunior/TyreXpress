@@ -5,7 +5,7 @@ import za.ac.cput.domain.Rim;
 
 public class RimFactory {
 
-    public static Rim createRim (String productID,
+    public static Rim createRim (Long productID,
                                 String name,
                                 String brand,
                                 double price,
@@ -17,7 +17,7 @@ public class RimFactory {
                                 Material material,
                                 String color) {
 
-        if (productID == null || productID.isEmpty()) return null;
+        if (productID == null) return null;
         if (name == null || name.isEmpty()) return null;
         if (brand == null || brand.isEmpty()) return null;
         if (price <= 0) return null;

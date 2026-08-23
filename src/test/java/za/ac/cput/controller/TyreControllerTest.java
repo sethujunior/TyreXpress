@@ -12,7 +12,7 @@ class TyreControllerTest {
 //    private static final TyreController controller = TyreController.getController();
 
     private static Tyre tyre = TyreFactory.createTyre(
-            "P001",
+            1l,
             "Pilot Sport 5",
             "Michelin",
             2899.99,
@@ -52,7 +52,7 @@ class TyreControllerTest {
     void update() {
 
         Tyre updated = TyreFactory.createTyre(
-                "P001",
+                1l,
                 "Pilot Sport 5",
                 "Michelin",
                 3100.00,

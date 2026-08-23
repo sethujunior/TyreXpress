@@ -2,13 +2,15 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.*;
 
-@Table(name = "rim")
+@Entity
+@Table(name = "rims")
 public class Rim extends Product {
 
     private double diameter;
     private double width;
     private String boltPattern;
     private int offset;
+    @Enumerated(EnumType.STRING)
     private Material material;
     private String color;
 

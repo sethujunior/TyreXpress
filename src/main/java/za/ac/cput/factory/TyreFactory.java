@@ -4,7 +4,7 @@ import za.ac.cput.domain.Tyre;
 
 public class TyreFactory {
 
-    public static Tyre createTyre(String productID,
+    public static Tyre createTyre(Long productID,
                                   String name,
                                   String brand,
                                   double price,
@@ -15,7 +15,7 @@ public class TyreFactory {
                                   String speedRating,
                                   Boolean runFlat) {
 
-        if (productID == null || productID.isEmpty()) return null;
+        if (productID == null) return null;
         if (name == null || name.isEmpty()) return null;
         if (brand == null || brand.isEmpty()) return null;
         if (price <= 0) return null;

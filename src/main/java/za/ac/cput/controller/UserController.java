@@ -2,12 +2,14 @@ package za.ac.cput.controller;
 
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.User;
+import za.ac.cput.dto.LoginRequest;
 import za.ac.cput.service.UserService;
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
     private UserService service;
 
     public UserController(UserService service) {
@@ -37,5 +39,13 @@ public class UserController {
     @GetMapping("/getAll")
     public List<User> getAll() {
         return service.getAll();
+    }
+
+    @PostMapping("/login")
+    public User login(@RequestBody LoginRequest request) {
+        return service.login(
+                request.getEmail(),
+                request.getPassword()
+        );
     }
 }

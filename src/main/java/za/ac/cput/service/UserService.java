@@ -42,4 +42,19 @@ public class UserService implements IUserService {
     public List<User> getAll() {
         return repository.findAll();
     }
+
+    public User login(String email, String password) {
+
+        User user = repository.findByEmail(email)
+                .orElse(null);
+
+        if (user == null) {
+            return null;
+        }
+
+        if (!user.getPassword().equals(password)) {
+            return null;
+        }
+        return user;
+    }
 }

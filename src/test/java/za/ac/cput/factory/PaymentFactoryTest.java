@@ -16,14 +16,14 @@ class PaymentFactoryTest {
     @Test
     void testSuccessfulCreation() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-001",
+                00l,
                 1500.00,
                 PaymentMethod.CARD,
                 PaymentStatus.PAID,
                 "order-001"
         );
         assertNotNull(payment);
-        assertEquals("PAY-001", payment.getPaymentID());
+        assertEquals(00l, payment.getPaymentID());
         assertEquals(1500.00, payment.getAmount());
         assertEquals(PaymentMethod.CARD, payment.getMethod());
         assertEquals(PaymentStatus.PAID, payment.getStatus());
@@ -45,7 +45,7 @@ class PaymentFactoryTest {
     @Test
     void testInvalidAmountReturnsNull() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-002",
+                002l,
                 0,
                 PaymentMethod.EFT,
                 PaymentStatus.PENDING,
@@ -57,7 +57,7 @@ class PaymentFactoryTest {
     @Test
     void testNullMethodReturnsNull() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-003",
+                003l,
                 500.00,
                 null,
                 PaymentStatus.PENDING,
@@ -69,7 +69,7 @@ class PaymentFactoryTest {
     @Test
     void testNullStatusReturnsNull() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-004",
+                004l,
                 500.00,
                 PaymentMethod.CASH,
                 null,
@@ -81,7 +81,7 @@ class PaymentFactoryTest {
     @Test
     void testEmptyOrderIDReturnsNull() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-005",
+                005l,
                 500.00,
                 PaymentMethod.CASH,
                 PaymentStatus.PENDING,

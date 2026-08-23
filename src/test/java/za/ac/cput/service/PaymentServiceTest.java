@@ -21,7 +21,7 @@ class PaymentServiceTest {
     @Test
     void testCreate() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-001",
+                001l,
                 1500.00,
                 PaymentMethod.CARD,
                 PaymentStatus.PAID,
@@ -34,21 +34,21 @@ class PaymentServiceTest {
     @Test
     void testRead() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-002",
+                002l,
                 500.00,
                 PaymentMethod.EFT,
                 PaymentStatus.PENDING,
                 "order-002"
         );
         service.create(payment);
-        Payment read = service.read("PAY-002");
+        Payment read = service.read(002l);
         System.out.println("Read: " + read);
     }
 
     @Test
     void testUpdate() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-003",
+                003l,
                 750.00,
                 PaymentMethod.CASH,
                 PaymentStatus.PENDING,
@@ -66,21 +66,21 @@ class PaymentServiceTest {
     @Test
     void testDelete() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-004",
+                004l,
                 250.00,
                 PaymentMethod.CARD,
                 PaymentStatus.PAID,
                 "order-004"
         );
         service.create(payment);
-        boolean deleted = service.delete("PAY-004");
+        boolean deleted = service.delete(004l);
         System.out.println("Deleted: " + deleted);
     }
 
     @Test
     void testGetAll() {
         Payment payment = PaymentFactory.buildPayment(
-                "PAY-005",
+                005l,
                 999.00,
                 PaymentMethod.EFT,
                 PaymentStatus.PAID,

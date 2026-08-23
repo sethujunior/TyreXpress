@@ -19,7 +19,7 @@ public class RimRepositoryTest {
 
         // Create
         Rim rim = RimFactory.createRim(
-                "P002",
+                1l,
                 "RS Alloy",
                 "BBS",
                 3999.99,
@@ -43,7 +43,7 @@ public class RimRepositoryTest {
 
         // Update
         Rim updatedRim = RimFactory.createRim(
-                "P002",
+                1l,
                 "RS Alloy",
                 "BBS",
                 4200.00,

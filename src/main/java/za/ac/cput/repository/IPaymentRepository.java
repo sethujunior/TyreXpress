@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Payment;
 
 @Repository
-public interface IPaymentRepository extends JpaRepository<Payment, String> {
+public interface IPaymentRepository extends JpaRepository<Payment, Long> {
 
 }

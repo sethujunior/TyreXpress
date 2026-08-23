@@ -1,7 +1,10 @@
 package za.ac.cput.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Tyre;
 
-public interface ITyreRepository extends IRepository<Tyre, String> {
+@Repository
+public interface ITyreRepository extends JpaRepository<Tyre, Long> {
 
 }

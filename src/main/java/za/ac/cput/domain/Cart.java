@@ -7,11 +7,9 @@ import java.util.Objects;
 @Table(name = "cart")
 public class Cart {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartId;
-
     private String customerId;
 
     protected Cart() {}

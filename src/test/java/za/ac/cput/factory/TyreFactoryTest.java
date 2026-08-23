@@ -14,7 +14,7 @@ public class TyreFactoryTest {
     public static void main(String[] args) {
 
         Tyre tyre = TyreFactory.createTyre(
-                "P001",
+                1l,
                 "Pilot Sport 5",
                 "Michelin",
                 2899.99,

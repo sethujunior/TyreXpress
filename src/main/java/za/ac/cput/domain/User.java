@@ -12,6 +12,7 @@ public class User {
     private String email;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @JsonIgnore
     private String password;
     @OneToOne(mappedBy = "user")
     @JsonIgnore
