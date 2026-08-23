@@ -1,24 +1,23 @@
 /* PaymentRepositoryTest.java
    Payment Repository Test class
-   Author: Bongikazi Mnyamana (222718404)*/
+   Author: Bongikazi Mnyamana (222718404)
+   Date: 22 August 2026 */
 
 package za.ac.cput.repository;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import za.ac.cput.domain.Payment;
 import za.ac.cput.domain.PaymentMethod;
 import za.ac.cput.domain.PaymentStatus;
 import za.ac.cput.factory.PaymentFactory;
 
+@DataJpaTest
 class PaymentRepositoryTest {
 
+    @Autowired
     private IPaymentRepository repository;
-
-    @BeforeEach
-    void setUp() {
-        repository = PaymentRepository.getRepository();
-    }
 
     @Test
     void testCreate() {
@@ -29,7 +28,7 @@ class PaymentRepositoryTest {
                 PaymentStatus.PAID,
                 "order-001"
         );
-        Payment created = repository.create(payment);
+        Payment created = repository.save(payment);
         System.out.println("Created: " + created);
     }
 
@@ -42,8 +41,8 @@ class PaymentRepositoryTest {
                 PaymentStatus.PENDING,
                 "order-002"
         );
-        repository.create(payment);
-        Payment read = repository.read("PAY-002");
+        repository.save(payment);
+        Payment read = repository.findById("PAY-002").orElse(null);
         System.out.println("Read: " + read);
     }
 
@@ -56,14 +55,14 @@ class PaymentRepositoryTest {
                 PaymentStatus.PENDING,
                 "order-003"
         );
-        repository.create(payment);
+        repository.save(payment);
 
         Payment updated = new Payment.Builder()
                 .copy(payment)
                 .setStatus(PaymentStatus.PAID)
                 .build();
 
-        Payment result = repository.update(updated);
+        Payment result = repository.save(updated);
         System.out.println("Updated: " + result);
     }
 
@@ -76,9 +75,9 @@ class PaymentRepositoryTest {
                 PaymentStatus.PAID,
                 "order-004"
         );
-        repository.create(payment);
-        boolean deleted = repository.delete("PAY-004");
-        System.out.println("Deleted: " + deleted);
+        repository.save(payment);
+        repository.deleteById("PAY-004");
+        System.out.println("Deleted: true");
     }
 
     @Test
@@ -90,7 +89,7 @@ class PaymentRepositoryTest {
                 PaymentStatus.PAID,
                 "order-005"
         );
-        repository.create(payment);
-        System.out.println("All payments: " + repository.getAll());
+        repository.save(payment);
+        System.out.println("All payments: " + repository.findAll());
     }
 }

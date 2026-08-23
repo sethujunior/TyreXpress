@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ClaudeCodeSettings">
+    <option name="claudePath" value="C:\Users\Bongikazi Mnyamana\AppData\Roaming\npm\claude.cmd" />
+    <option name="nodePath" value="C:\Program Files\nodejs\node.exe" />
+  </component>
+</project>

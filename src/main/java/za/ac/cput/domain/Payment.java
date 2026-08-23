@@ -7,34 +7,29 @@ package za.ac.cput.domain;
 import jakarta.persistence.*;
 import java.util.Objects;
 
+@Entity
 @Table(name = "payment")
 public class Payment {
 
     @Id
     @Column(name = "payment_id")
-    private final String paymentID;
+    private String paymentID;
 
     @Column(name = "amount")
-    private final double amount;
+    private double amount;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "method")
-    private final PaymentMethod method;
+    private PaymentMethod method;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private final PaymentStatus status;
+    private PaymentStatus status;
 
     @Column(name = "order_id")
-    private final String orderID;
+    private String orderID;
 
-    protected Payment() {
-        this.paymentID = null;
-        this.amount = 0;
-        this.method = null;
-        this.status = null;
-        this.orderID = null;
-    }
+    protected Payment() {}
 
     private Payment(Builder builder) {
         this.paymentID = builder.paymentID;

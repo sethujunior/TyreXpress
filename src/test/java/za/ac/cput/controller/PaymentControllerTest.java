@@ -1,8 +1,9 @@
-/* PaymentServiceTest.java
-   Payment Service Test class
-   Author: Bongikazi Mnyamana (222718404)*/
+/* PaymentControllerTest.java
+   Payment Controller Test class
+   Author: Bongikazi Mnyamana (222718404)
+   Date: 15 July 2026 */
 
-package za.ac.cput.service;
+package za.ac.cput.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,10 @@ import za.ac.cput.domain.PaymentStatus;
 import za.ac.cput.factory.PaymentFactory;
 
 @SpringBootTest
-class PaymentServiceTest {
+class PaymentControllerTest {
 
     @Autowired
-    private PaymentService service;
+    private PaymentController controller;
 
     @Test
     void testCreate() {
@@ -27,7 +28,7 @@ class PaymentServiceTest {
                 PaymentStatus.PAID,
                 "order-001"
         );
-        Payment created = service.create(payment);
+        Payment created = controller.create(payment);
         System.out.println("Created: " + created);
     }
 
@@ -40,8 +41,8 @@ class PaymentServiceTest {
                 PaymentStatus.PENDING,
                 "order-002"
         );
-        service.create(payment);
-        Payment read = service.read("PAY-002");
+        controller.create(payment);
+        Payment read = controller.read("PAY-002");
         System.out.println("Read: " + read);
     }
 
@@ -54,12 +55,12 @@ class PaymentServiceTest {
                 PaymentStatus.PENDING,
                 "order-003"
         );
-        service.create(payment);
+        controller.create(payment);
         Payment updated = new Payment.Builder()
                 .copy(payment)
                 .setStatus(PaymentStatus.PAID)
                 .build();
-        Payment result = service.update(updated);
+        Payment result = controller.update(updated);
         System.out.println("Updated: " + result);
     }
 
@@ -72,8 +73,8 @@ class PaymentServiceTest {
                 PaymentStatus.PAID,
                 "order-004"
         );
-        service.create(payment);
-        boolean deleted = service.delete("PAY-004");
+        controller.create(payment);
+        boolean deleted = controller.delete("PAY-004");
         System.out.println("Deleted: " + deleted);
     }
 
@@ -86,7 +87,7 @@ class PaymentServiceTest {
                 PaymentStatus.PAID,
                 "order-005"
         );
-        service.create(payment);
-        System.out.println("All payments: " + service.getAll());
+        controller.create(payment);
+        System.out.println("All: " + controller.getAll());
     }
 }
