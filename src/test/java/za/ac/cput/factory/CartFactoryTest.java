@@ -11,7 +11,7 @@ class CartFactoryTest {
     void createCart() {
                 CartFactory cartFactory = new CartFactory();
 
-               Cart cart = cartFactory.createCart("CRT-101", "01");
+               Cart cart = cartFactory.createCart(10l, 01l);
 
                 System.out.println(cart);
     }

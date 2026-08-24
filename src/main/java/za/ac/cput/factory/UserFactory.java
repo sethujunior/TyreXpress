@@ -6,7 +6,7 @@ import za.ac.cput.util.Helper;
 public class UserFactory {
 
     public static User createUser(Long userId,  String email, Role role,String password) {
-        if(Helper.isNullOrEmpty(String.valueOf(userId)) || Helper.isNullOrEmpty(email)){
+        if(Helper.isNullOrEmpty(email)){
             throw new IllegalArgumentException("userId or email is null or empty");
         }
         if(!Helper.isValidEmail(email)){

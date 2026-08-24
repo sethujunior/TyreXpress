@@ -5,8 +5,8 @@ import za.ac.cput.util.Helper;
 
 public class AddressFactory {
 
-     public static Address createAddress(Long addressId, String street, String city, String province, String postalCode, Customer customer) {
-         if (Helper.isNullOrEmpty(String.valueOf(addressId)) || Helper.isNullOrEmpty(street) || customer == null) {
+     public static Address createAddress(Long addressId, String street, String city, String province, String postalCode) {
+         if (Helper.isNullOrEmpty(street)) {
              throw new IllegalArgumentException( "Customer is null or address is empty.");
          }
          if(!Helper.isValidPostalCode(postalCode)){
@@ -18,7 +18,6 @@ public class AddressFactory {
                  .setcity(city)
                  .setprovince(province)
                  .setpostalCode(postalCode)
-                 .setCustomer(customer)
                  .build();
      }
 }

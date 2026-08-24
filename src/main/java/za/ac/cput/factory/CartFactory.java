@@ -15,16 +15,14 @@ public class CartFactory {
                 .build();
     }
 
-    public static Cart createCart(Long cartId, String customerId) {
-        if (Helper.isNullOrEmpty(customerId)) {
+    public static Cart createCart(Long cartId, long customerId) {
+        if (Helper.isNullOrEmpty(String.valueOf(customerId))) {
             throw new IllegalArgumentException("customerId is null or empty");
         }
 
-
-
         return new Cart.Builder()
                 .setCartId(cartId)
-                .setCustomerId(customerId)
+                .setCustomerId(String.valueOf(customerId))
                 .build();
     }
 }

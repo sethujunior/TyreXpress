@@ -10,10 +10,10 @@ void createCartItem() {
     CartItermFactory cartItemFactory = new CartItermFactory();
 
     CartItem cartItem = cartItemFactory.createCartItem(
-            "CI-909",
+            909l,
             3,
             "PROD-55",
-            "CRT-101"
+            101l
     );
 
     System.out.println(cartItem);
