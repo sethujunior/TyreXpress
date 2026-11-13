@@ -53,11 +53,45 @@ public class SecurityConfig {
 
         http.cors(cors -> cors.configurationSource(corsConfigurationSource())).csrf(csrf -> csrf.disable()).authenticationProvider(authenticationProvider)
 
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/users/create", "/users/login", "/addresses/create", "/customers/create", "/tyres/getAll", "/tyres/read/**", "/rims/getAll", "/rims/read/**", "/uploads/**").permitAll()
+                .authorizeHttpRequests(auth -> auth
 
-                        .requestMatchers("/tyres/create", "/tyres/update", "/tyres/delete/**", "/rims/create", "/rims/update", "/rims/delete/**", "/admins/**").hasRole("ADMIN")
+                        // Public endpoints
+                        .requestMatchers(
+                                "/users/create",
+                                "/users/login",
+                                "/addresses/create",
+                                "/customers/create",
+                                "/tyres/getAll",
+                                "/tyres/read/**",
+                                "/rims/getAll",
+                                "/rims/read/**",
+                                "/uploads/**"
+                        ).permitAll()
 
-                        .anyRequest().authenticated()).httpBasic(Customizer.withDefaults());
+                        // ADMIN only
+                        .requestMatchers(
+                                "/tyres/create",
+                                "/tyres/update",
+                                "/tyres/delete/**",
+                                "/rims/create",
+                                "/rims/update",
+                                "/rims/delete/**",
+                                "/admins/**"
+                        ).hasRole("ADMIN")
+
+                        // CUSTOMER and ADMIN
+                        .requestMatchers(
+                                "/customers/**",
+                                "/cart/**",
+                                "/cartitem/**",
+                                "/orders/**",
+                                "/payment/**"
+                        ).hasAnyRole("CUSTOMER", "ADMIN")
+
+                        // Everything else requires authentication
+                        .anyRequest().authenticated()
+                )
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
 
