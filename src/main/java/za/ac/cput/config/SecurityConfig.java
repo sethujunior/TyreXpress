@@ -53,7 +53,7 @@ public class SecurityConfig {
 
         http.cors(cors -> cors.configurationSource(corsConfigurationSource())).csrf(csrf -> csrf.disable()).authenticationProvider(authenticationProvider)
 
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/users/create", "/users/login", "/addresses/create", "/customers/create", "/tyres/getAll", "/tyres/read/**", "/rims/getAll", "/rims/read/**").permitAll()
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/users/create", "/users/login", "/addresses/create", "/customers/create", "/tyres/getAll", "/tyres/read/**", "/rims/getAll", "/rims/read/**", "/uploads/**").permitAll()
 
                         .requestMatchers("/tyres/create", "/tyres/update", "/tyres/delete/**", "/rims/create", "/rims/update", "/rims/delete/**", "/admins/**").hasRole("ADMIN")
 
